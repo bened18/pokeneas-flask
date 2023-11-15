@@ -20,18 +20,37 @@ pokeneas = [
 @app.route('/pokenea_json')
 def pokenea_json():
     pokenea_aleatorio = random.choice(pokeneas)
-    #id_container = os.uname()[1]
-    pokenea_info = {
-        "Pokenea": {
-            "id": pokenea_aleatorio["id"],
-            "nombre": pokenea_aleatorio["nombre"],
-            "altura": pokenea_aleatorio["altura"],
-            "habilidad": pokenea_aleatorio["habilidad"]
-        },
-        "id_contenedor": "id_container"
-    }
-    response = Response(json.dumps(pokenea_info), content_type='application/json')
-    return response
+    try:
+        id_container = os.uname()[1]
+    except Exception as e:
+        pass
+
+    if id_container:
+        pokenea_info = {
+            "Pokenea": {
+                "id": pokenea_aleatorio["id"],
+                "nombre": pokenea_aleatorio["nombre"],
+                "altura": pokenea_aleatorio["altura"],
+                "habilidad": pokenea_aleatorio["habilidad"]
+            },
+            
+            "id_contenedor": id_container
+        }
+        response = Response(json.dumps(pokenea_info), content_type='application/json')
+        return response
+    else:
+        pokenea_info = {
+            "Pokenea": {
+                "id": pokenea_aleatorio["id"],
+                "nombre": pokenea_aleatorio["nombre"],
+                "altura": pokenea_aleatorio["altura"],
+                "habilidad": pokenea_aleatorio["habilidad"]
+            },
+            
+            "id_contenedor": "id_container"
+        }
+        response = Response(json.dumps(pokenea_info), content_type='application/json')
+        return response
 
 @app.route('/pokenea_imagen')
 def pokenea_imagen():
