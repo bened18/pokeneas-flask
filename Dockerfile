@@ -1,7 +1,7 @@
 FROM python:3.8
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /usr/src/pokeneas
 
 # Copy the Flask app source to the working directory
 COPY . .
