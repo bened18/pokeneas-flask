@@ -55,10 +55,19 @@ def pokenea_json():
 @app.route('/pokenea_imagen')
 def pokenea_imagen():
     pokenea_aleatorio = random.choice(pokeneas)
-    #id_container = os.uname()[1]
-    html_content = f"<h1>Frase Filosofica: {pokenea_aleatorio['frase filosofica']}</h1><h2>nombre: {pokenea_aleatorio['nombre']}</h2><h2>habilidad: {pokenea_aleatorio['habilidad']}<h2>id_contenedor: id_container</h2><img src='{pokenea_aleatorio['imagen']}' alt='Imagen'>"
-    response = Response(json.dumps(html_content), content_type='text/html')
-    return response
+    try:
+        id_container = os.uname()[1]
+    except Exception as e:
+        pass
+    
+    if id_container:
+        html_content = f"<h1>Frase Filosofica: {pokenea_aleatorio['frase filosofica']}</h1><h2>nombre: {pokenea_aleatorio['nombre']}</h2><h2>habilidad: {pokenea_aleatorio['habilidad']}<h2>id_contenedor: {id_container}</h2><img src='{pokenea_aleatorio['imagen']}' alt='Imagen'>"
+        response = Response(json.dumps(html_content), content_type='text/html')
+        return response
+    else:
+        html_content = f"<h1>Frase Filosofica: {pokenea_aleatorio['frase filosofica']}</h1><h2>nombre: {pokenea_aleatorio['nombre']}</h2><h2>habilidad: {pokenea_aleatorio['habilidad']}<h2>id_contenedor: id_container</h2><img src='{pokenea_aleatorio['imagen']}' alt='Imagen'>"
+        response = Response(json.dumps(html_content), content_type='text/html')
+        return response
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
