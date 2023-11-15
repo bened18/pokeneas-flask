@@ -20,7 +20,7 @@ pokeneas = [
 @app.route('/pokenea_json')
 def pokenea_json():
     pokenea_aleatorio = random.choice(pokeneas)
-    id_container = os.uname()[1]
+    #id_container = os.uname()[1]
     pokenea_info = {
         "Pokenea": {
             "id": pokenea_aleatorio["id"],
@@ -28,7 +28,7 @@ def pokenea_json():
             "altura": pokenea_aleatorio["altura"],
             "habilidad": pokenea_aleatorio["habilidad"]
         },
-        "id_contenedor": id_container
+        "id_contenedor": "id_container"
     }
     response = Response(json.dumps(pokenea_info), content_type='application/json')
     return response
@@ -36,8 +36,8 @@ def pokenea_json():
 @app.route('/pokenea_imagen')
 def pokenea_imagen():
     pokenea_aleatorio = random.choice(pokeneas)
-    id_container = os.uname()[1]
-    html_content = f"<h1>Frase Filosofica: {pokenea_aleatorio['frase filosofica']}</h1><h2>nombre: {pokenea_aleatorio['nombre']}</h2><h2>habilidad: {pokenea_aleatorio['habilidad']}<h2>id_contenedor: {id_container}</h2><img src='{pokenea_aleatorio['imagen']}' alt='Imagen'>"
+    #id_container = os.uname()[1]
+    html_content = f"<h1>Frase Filosofica: {pokenea_aleatorio['frase filosofica']}</h1><h2>nombre: {pokenea_aleatorio['nombre']}</h2><h2>habilidad: {pokenea_aleatorio['habilidad']}<h2>id_contenedor: id_container</h2><img src='{pokenea_aleatorio['imagen']}' alt='Imagen'>"
     response = Response(json.dumps(html_content), content_type='text/html')
     return response
 
